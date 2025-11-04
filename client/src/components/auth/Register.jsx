@@ -69,12 +69,11 @@ const Register = () => {
         },
         body: JSON.stringify(payload),
       });
-
+      
       const data = await response.json();
 
       if (response.ok) {
-        login({ ...data.user, type: formData.type });
-        navigate('/');
+        navigate('/login');
       } else {
         setError(data.error || 'Registration failed');
       }

@@ -16,6 +16,11 @@ router.post(
   auth("student"),
   studentController.registerEvent
 );
+router.delete(
+  "/events/register",
+  auth("student"),
+  studentController.unregisterEvent
+);
 router.get(
   "/events/registered",
   auth("student"),

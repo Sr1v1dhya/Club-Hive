@@ -12,10 +12,10 @@ const ClubHome = () => {
 
   const fetchData = async () => {
     try {
-      // TODO: Replace with actual API call
-      const response = await fetch('http://localhost:5000/api/events/upcoming', {
+      
+      const response = await fetch('http://localhost:5000/api/club/events', {
         headers: {
-          'Authorization': `Bearer ${user.token}` // Assuming token-based auth
+          'Authorization': `Bearer ${user.token}` 
         }
       });
       const data = await response.json();
@@ -49,7 +49,7 @@ const ClubHome = () => {
       {/* Club Info */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Club Information</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex justify-start gap-4">
           <div>
             <p className="text-gray-600">
               <span className="font-medium">Club Name:</span> {user.club_name}
@@ -87,21 +87,6 @@ const ClubHome = () => {
         )}
       </div>
 
-      {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors">
-            Create New Event
-          </button>
-          <button className="bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 transition-colors">
-            Manage Events
-          </button>
-          <button className="bg-purple-600 text-white py-3 px-4 rounded-md hover:bg-purple-700 transition-colors">
-            View Registrations
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
@@ -121,14 +106,7 @@ const EventCard = ({ event }) => {
       <p className="text-gray-600 mb-4">
         <span className="font-medium">Venue:</span> {event.venue}
       </p>
-      <div className="flex space-x-2">
-        <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-          Edit
-        </button>
-        <button className="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors">
-          Delete
-        </button>
-      </div>
+
     </div>
   );
 };

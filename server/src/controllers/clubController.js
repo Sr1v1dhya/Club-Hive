@@ -87,3 +87,15 @@ exports.getEventRegistrations = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
+exports.getClubEvents = async (req, res) => {
+  try {
+    const { id: club_id } = req.user;
+    const events = await Event.findAll({
+      where: { club_id },
+    });
+    res.json(events);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

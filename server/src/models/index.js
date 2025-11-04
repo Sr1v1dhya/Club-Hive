@@ -30,6 +30,9 @@ Event.belongsToMany(Student, {
   otherKey: "student_id",
 });
 
+EventRegistration.belongsTo(Student, { foreignKey: "student_id" });
+EventRegistration.belongsTo(Event, { foreignKey: "event_id" });
+
 Student.belongsToMany(Club, {
   through: ClubFollower,
   foreignKey: "student_id",

@@ -1,3 +1,20 @@
+// Unregister from an event
+exports.unregisterEvent = async (req, res) => {
+  try {
+    const { id: student_id } = req.user;
+    const { event_id } = req.body;
+    const registration = await EventRegistration.findOne({
+      where: { student_id, event_id },
+    });
+    if (!registration) {
+      return res.status(404).json({ error: "Registration not found" });
+    }
+    await registration.destroy();
+    res.json({ message: "Registration cancelled" });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 const {
   Club,
   Event,
@@ -59,9 +76,32 @@ exports.getFollowedClubs = async (req, res) => {
           where: { student_id },
           through: { attributes: [] },
         },
+        {
+          model: Event,
+          required: false,
+        },
       ],
     });
-    res.json(clubs);
+
+    // For each club, split events into upcoming and past
+    const today = new Date();
+    const clubsWithEvents = clubs.map((club) => {
+      const events = club.Events || [];
+      const upcoming_events = events.filter(
+        (event) => new Date(event.date) >= today
+      );
+      const past_events = events.filter(
+        (event) => new Date(event.date) < today
+      );
+      return {
+        club_id: club.club_id,
+        club_name: club.club_name,
+        description: club.description,
+        upcoming_events,
+        past_events,
+      };
+    });
+    res.json(clubsWithEvents);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -89,6 +129,10 @@ exports.getRegisteredEvents = async (req, res) => {
           model: Student,
           where: { student_id },
           through: { attributes: [] },
+        },
+        {
+          model: Club,
+          attributes: ["club_id", "club_name"],
         },
       ],
     });
