@@ -22,8 +22,27 @@ exports.followClub = async (req, res) => {
   try {
     const { id: student_id } = req.user; // from auth middleware
     const { club_id } = req.body;
+    console.log(req.body);
     await ClubFollower.findOrCreate({ where: { student_id, club_id } });
     res.json({ message: "Club followed" });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Unfollow a club
+exports.unfollowClub = async (req, res) => {
+  try {
+    const { id: student_id } = req.user; // from auth middleware
+    const { club_id } = req.body;
+    const followRecord = await ClubFollower.findOne({
+      where: { student_id, club_id },
+    });
+    if (!followRecord) {
+      return res.status(404).json({ error: "Follow record not found" });
+    }
+    await followRecord.destroy();
+    res.json({ message: "Club unfollowed" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

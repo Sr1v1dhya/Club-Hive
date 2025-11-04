@@ -5,6 +5,7 @@ const auth = require("../middleware/auth");
 
 router.get("/clubs", auth("student"), studentController.getAllClubs);
 router.post("/clubs/follow", auth("student"), studentController.followClub);
+router.delete("/clubs/follow", auth("student"), studentController.unfollowClub);
 router.get(
   "/clubs/followed",
   auth("student"),

@@ -116,14 +116,19 @@
 
 -   Redirects to club dashboard.
 
-### Home Page
-
+### Home Page (club)
+    Nav bar with links to:
+    Home
+    Create Events page
+    Manage events page
+    Registrations page
+    Display:
 -   Upcoming events\
 -   Global calendar\
 -   Club details
 
 ### Create Events Page
-
+Navigation bar same as home page of club 
 Adds a new record to the `events` table with: - Event name\
 - Date\
 - Time\
@@ -132,20 +137,20 @@ Adds a new record to the `events` table with: - Event name\
 - Club ID (determined by the logged-in club)
 
 ### Manage Events
-
+Navigation bar same as home page of club 
 Displays and allows management of events from the `events` table: -
 Upcoming events (based on date) - Past events - Event details in
 dropdowns
 
 ### Registrations Page
-
+Navigation bar same as home page of club 
 Displays registered students for each event using
 `event_registrations`: - Upcoming and past events - Student details
 (e.g., email)
 
 ------------------------------------------------------------------------
 
-## 🏠 Home Page
+## 🏠 Home Page students
 
 **Tables used:** `students`, `events`, `clubs`, `club_followers`
 
@@ -165,7 +170,7 @@ Displays registered students for each event using
 
 **Tables used:** `clubs`, `events`, `club_followers`, `students`
 
--   Navigation bar same as home page\
+-   Navigation bar same as home page of students
 -   Display:
     -   Club name
     -   Upcoming event name
@@ -177,7 +182,7 @@ Displays registered students for each event using
 ## ⭐ My Clubs Page
 
 **Tables used:** `club_followers`, `clubs`, `events`
-
+    Navigation bar same as home page of students
 -   Displays only the clubs followed by the logged-in student\
 -   Shows:
     -   Club name\
@@ -189,7 +194,7 @@ Displays registered students for each event using
 ## 📝 Registered Events Page
 
 **Tables used:** `event_registrations`, `events`, `clubs`, `students`
-
+    Navigation bar same as home page of students
 -   Displays events the student has registered for\
 -   Shows:
     -   Club name\
